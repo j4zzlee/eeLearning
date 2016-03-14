@@ -3,5 +3,11 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
+  },
+  "resolutions": {
+    "angular": "^1.5.0"
+  },
+  "dependencies": {
+    "angular-word-unscramble-game": "st2forget/angular-word-unscramble-game"
   }
 }

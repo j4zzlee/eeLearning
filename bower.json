@@ -8,6 +8,7 @@
     "angular": "^1.5.0"
   },
   "dependencies": {
-    "angular-word-unscramble-game": "st2forget/angular-word-unscramble-game"
+    "angular-word-unscramble-game": "st2forget/angular-word-unscramble-game",
+    "angular-action-verbs-game": "st2forget/angular-action-verbs-game"
   }
 }

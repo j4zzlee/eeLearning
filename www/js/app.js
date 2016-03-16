@@ -9,7 +9,8 @@ angular.module('starter', [
   'ionic',
   'starter.controllers',
   'starter.services',
-  'st2forget.word-unscramble-game'
+  'st2forget.word-unscramble-game',
+  'st2forget.action-verbs-game'
 ])
 
 .run(function($ionicPlatform) {
@@ -91,7 +92,16 @@ angular.module('starter', [
         controller: 'WorldUnscrambleCtrl'
       }
     }
-  });
+  })
+    .state('tab.action-verbs-game', {
+      url: '/action-verbs',
+      views: {
+        'tab-action-verbs-game': {
+          templateUrl: 'templates/tab-action-verbs-game.html',
+          controller: 'ActionVerbsCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

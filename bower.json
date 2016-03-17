@@ -11,6 +11,7 @@
     "angular-word-unscramble-game": "st2forget/angular-word-unscramble-game",
     "angular-action-verbs-game": "st2forget/angular-action-verbs-game",
     "angular-css": "^1.0.7",
-    "lodash": "^4.6.1"
+    "lodash": "^4.6.1",
+    "ngCordova": "^0.1.24-alpha"
   }
 }

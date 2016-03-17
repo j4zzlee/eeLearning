@@ -11,7 +11,8 @@ angular.module('starter', [
   'starter.controllers',
   'starter.services',
   'st2forget.word-unscramble-game',
-  'st2forget.action-verbs-game'
+  'st2forget.action-verbs-game',
+  'ngDraggable'
 ])
 
 .run(function($ionicPlatform) {

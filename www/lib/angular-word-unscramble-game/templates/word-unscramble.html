@@ -1,0 +1,13 @@
+<div>
+  Hello Scramble Game !!!!!!
+</div>
+<!--<div class="row text-center" ng-controller="wordUnscrambleGame">-->
+<div class="row text-center">
+  <ul class="draglist">
+    <li ng-repeat="obj in draggableObjects" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+      <div ng-drag="true" ng-drag-data="obj" ng-class="obj.name">
+        {{obj.name}}
+      </div>
+    </li>
+  </ul>
+</div>

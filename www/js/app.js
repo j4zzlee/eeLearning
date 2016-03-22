@@ -8,13 +8,10 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
-  'ng-sortable',
   'starter.controllers',
   'starter.services',
   'st2forget.word-unscramble-game',
-  'st2forget.action-verbs-game',
-  'ngDraggable'
-
+  'st2forget.action-verbs-game'
 ])
 
 .run(function($ionicPlatform) {

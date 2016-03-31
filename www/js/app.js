@@ -8,6 +8,7 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
+  'ngDialog',
   'starter.controllers',
   'starter.services',
   'st2forget.word-unscramble-game',

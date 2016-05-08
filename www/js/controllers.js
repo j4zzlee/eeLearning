@@ -2,7 +2,13 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('WorldUnscrambleCtrl', function($scope) {})
+.controller('WorldUnscrambleCtrl', function($scope) {
+  $scope.model = { //TODO: get data from api $.get(url, function () {})
+    Id: 1,
+    Statement: 'LOVE',
+    Hint: 'Thing that everyone need most'
+  }
+})
 .controller('ActionVerbsCtrl', function($scope) {
   $scope.model = {
     Description: 'Practice Action Verbs Vocabulary with this ESL  Memory Game. This game is also excellent for Vocabulary Teaching and Practice. ESL Learners and Teachers can use it to review English vocabulary or simply practice these words. This memory games has audio, images and text which makes it possible to practice spelling, reading, listening and word recognition. It is great for beginner and elementary ESL Lesson Plans.',

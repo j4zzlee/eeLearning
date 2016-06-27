@@ -1,15 +1,178 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngDialog'])
 
-  .controller('DashCtrl', function ($scope) {
+  .controller('DashCtrl', function ($scope, $location) {
   })
 
-  .controller('WorldUnscrambleCtrl', function ($scope) {
-    $scope.model = { //TODO: get data from api $.get(url, function () {})
-      Id: 1,
-      Statement: 'LOVE',
-      Hint: 'Thing that everyone need most'
+  .controller('WorldUnscrambleCtrl', function ($scope, $location, $http, ngDialog) {
+    var queryString = $location.search(),
+      questionId = queryString.questionId,
+      baseUrl = 'http://52.37.39.97',
+      getQuestionDetailUrl = "/odata/Quizs(GUID'<questionId>')?$expand=Lesson,%20Questions,Questions/Answers",
+      url = baseUrl + getQuestionDetailUrl.replace('<questionId>', questionId);
+
+    $scope.jsondata = {
+      "odata.metadata": "http://52.37.39.97/odata/$metadata#Quizs/@Element",
+      "Lesson": {
+        "Name": "INQUIRY ON SCHOLARSHIP PROGRAM",
+        "CategoryId": "284dce71-2325-11e6-ac3a-02ef6c068343",
+        "LevelId": "29222f2b-2325-11e6-ac3a-02ef6c068343",
+        "VideoId": "2b1a460c-2325-11e6-ac3a-02ef6c068343",
+        "LiveChatSessionId": "29450a67-2325-11e6-ac3a-02ef6c068343",
+        "SessionCost": 25,
+        "Downloadable": true,
+        "IsPublished": false,
+        "Id": "28f9255d-2325-11e6-ac3a-02ef6c068343",
+        "IsDeleted": false
+      },
+      "Questions": [
+        {
+          "Answers": [
+            {
+              "Description": "ASSIST",
+              "QuestionId": "127cf8ee-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "127d227d-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "\u52a9\u653b ",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127cf8ee-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": " SUMMIT",
+              "QuestionId": "127d49c9-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "127d72ad-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": " \u9996\u8111",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127d49c9-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": " NOTIFY",
+              "QuestionId": "127d9cb6-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "1280a952-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": " \u901a\u77e5",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127d9cb6-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": " ELSE",
+              "QuestionId": "1280cfec-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "1280f666-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "  \u5176\u4ed6",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "1280cfec-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": " CONTACT",
+              "QuestionId": "1281397e-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "128166bd-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "  \u8054\u7cfb",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "1281397e-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": " DELIGHTFUL",
+              "QuestionId": "128318f3-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "12833ee5-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "  \u6109\u5feb",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "128318f3-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": "THINK",
+              "QuestionId": "1283646a-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "1283898d-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "  \u627f\u8ba4",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "1283646a-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }
+      ],
+      "QuizTypeId": 1,
+      "LessonId": "28f9255d-2325-11e6-ac3a-02ef6c068343",
+      "HelperText": null,
+      "Id": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+      "IsDeleted": false
+    };
+    /*Get URL json*/
+    this.processData = function (inputData) {
+      var listOfWords = [];
+      for (var i = 0, l = inputData.length; i < l; i++) {
+        listOfWords.push([inputData[i].Answers[0].Description.replace(/ /g, ''),
+          inputData[i].Description.replace(/ /g, '')]); // Get WORDS and descriptions in ARRAY
+      }
+
+      var randomNumber = _.random(0, 6);
+
+      $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', { //TODO: get data from api $.get(url, function () {})
+        Id: randomNumber,
+        Statement: listOfWords[randomNumber][0],
+        Hint: listOfWords[randomNumber][1]
+      })
+    };
+
+    try {
+      var self = this;
+      $http.get(url)
+        .success(function (data, status) {
+          $scope.status = status;
+          $scope.jsondata = data;
+          // console.log(status);
+          console.log(data);
+
+          var inputData = data.Questions;
+          console.log(data.Questions);
+          self.processData(inputData);
+        })
+        .error(function (data, status) {
+          var inputData = $scope.jsondata.Questions;
+          self.processData(inputData);
+        });
+    } catch (ex) {
+      //sychronous
+      var inputData = $scope.jsondata.Questions;
+      this.processData(inputData);
     }
   })
+
+
   .controller('UnorderedSentenceCtrl', function ($scope) {
     $scope.model = {
       Id: 1,

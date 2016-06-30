@@ -131,6 +131,7 @@ angular.module('starter.controllers', ['ngDialog'])
       "Id": "127a6c85-232c-11e6-ac3a-02ef6c068343",
       "IsDeleted": false
     };
+
     /*Get URL json*/
     this.processData = function (inputData) {
       var listOfWords = [];
@@ -141,12 +142,12 @@ angular.module('starter.controllers', ['ngDialog'])
 
       var randomNumber = _.random(0, 6);
 
-      $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', { //TODO: get data from api $.get(url, function () {})
-        Id: randomNumber,
-        Statement: listOfWords[randomNumber][0],
-        Hint: listOfWords[randomNumber][1]
-      })
-    };
+      // $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', { //TODO: get data from api $.get(url, function () {})
+      //   Id: randomNumber,
+      //   Statement: listOfWords[randomNumber][0],
+      //   Hint: listOfWords[randomNumber][1]
+      // })
+      $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', listOfWords)};
 
     try {
       var self = this;
@@ -155,10 +156,10 @@ angular.module('starter.controllers', ['ngDialog'])
           $scope.status = status;
           $scope.jsondata = data;
           // console.log(status);
-          console.log(data);
+          // console.log(data);
 
           var inputData = data.Questions;
-          console.log(data.Questions);
+          // console.log(data.Questions);
           self.processData(inputData);
         })
         .error(function (data, status) {
@@ -170,6 +171,8 @@ angular.module('starter.controllers', ['ngDialog'])
       var inputData = $scope.jsondata.Questions;
       this.processData(inputData);
     }
+
+
   })
 
 

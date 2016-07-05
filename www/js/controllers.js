@@ -140,9 +140,9 @@ angular.module('starter.controllers', ['ngDialog'])
           inputData[i].Description.replace(/ /g, '')]); // Get WORDS and descriptions in ARRAY
       }
 
-      var randomNumber = _.random(0, 6);
+      // var randomNumber = _.random(0, 6);
 
-      // $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', { //TODO: get data from api $.get(url, function () {})
+      // $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', {
       //   Id: randomNumber,
       //   Statement: listOfWords[randomNumber][0],
       //   Hint: listOfWords[randomNumber][1]

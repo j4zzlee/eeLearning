@@ -151,7 +151,7 @@ angular.module('starter.controllers', ['ngDialog'])
           $scope.jsondata = data;
           // console.log(status);
           // console.log(data);
-
+          
           var inputData = data.Questions;
           // console.log(data.Questions);
           self.processData(inputData);

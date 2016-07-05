@@ -3,6 +3,7 @@ angular.module('starter.controllers', ['ngDialog'])
   .controller('DashCtrl', function ($scope, $location) {
   })
 
+
   .controller('WorldUnscrambleCtrl', function ($scope, $location, $http, ngDialog) {
     var queryString = $location.search(),
       questionId = queryString.questionId,
@@ -140,13 +141,6 @@ angular.module('starter.controllers', ['ngDialog'])
           inputData[i].Description.replace(/ /g, '')]); // Get WORDS and descriptions in ARRAY
       }
 
-      // var randomNumber = _.random(0, 6);
-
-      // $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', {
-      //   Id: randomNumber,
-      //   Statement: listOfWords[randomNumber][0],
-      //   Hint: listOfWords[randomNumber][1]
-      // })
       $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', listOfWords)};
 
     try {
@@ -167,12 +161,9 @@ angular.module('starter.controllers', ['ngDialog'])
           self.processData(inputData);
         });
     } catch (ex) {
-      //sychronous
       var inputData = $scope.jsondata.Questions;
       this.processData(inputData);
     }
-
-
   })
 
 

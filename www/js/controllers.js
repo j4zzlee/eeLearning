@@ -4,7 +4,7 @@ angular.module('starter.controllers', ['ngDialog'])
   })
 
 
-  .controller('WorldUnscrambleCtrl', function ($scope, $location, $http, ngDialog) {
+  .controller('WorldUnscrambleCtrl', function ($scope, $location, $http) {
     var queryString = $location.search(),
       questionId = queryString.questionId,
       baseUrl = 'http://52.37.39.97',
@@ -141,7 +141,8 @@ angular.module('starter.controllers', ['ngDialog'])
           inputData[i].Description.replace(/ /g, '')]); // Get WORDS and descriptions in ARRAY
       }
 
-      $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', listOfWords)};
+      $scope.$broadcast('WorldUnscrambleCtrlModelUpdated', listOfWords)
+    };
 
     try {
       var self = this;
@@ -151,7 +152,7 @@ angular.module('starter.controllers', ['ngDialog'])
           $scope.jsondata = data;
           // console.log(status);
           // console.log(data);
-          
+
           var inputData = data.Questions;
           // console.log(data.Questions);
           self.processData(inputData);
@@ -167,13 +168,125 @@ angular.module('starter.controllers', ['ngDialog'])
   })
 
 
-  .controller('UnorderedSentenceCtrl', function ($scope) {
-    $scope.model = {
-      Id: 1,
-      Statement: "HOW ARE YOU",
-      Hint: 'When two people meet'
+  .controller('UnorderedSentenceCtrl', function ($scope, $location, $http) {
+    var queryString = $location.search(),
+      questionId = queryString.questionId,
+      baseUrl = 'http://52.37.39.97',
+      getQuestionDetailUrl = "/odata/Quizs(GUID'<questionId>')?$expand=Lesson,%20Questions,Questions/Answers",
+      url = baseUrl + getQuestionDetailUrl.replace('<questionId>', questionId);
+
+    $scope.jsondata = {
+      "odata.metadata": "http://52.37.39.97/odata/$metadata#Quizs/@Element",
+      "Lesson": {
+        "Name": "INQUIRY ON SCHOLARSHIP PROGRAM",
+        "CategoryId": "284dce71-2325-11e6-ac3a-02ef6c068343",
+        "LevelId": "29222f2b-2325-11e6-ac3a-02ef6c068343",
+        "VideoId": "2b1a460c-2325-11e6-ac3a-02ef6c068343",
+        "LiveChatSessionId": "29450a67-2325-11e6-ac3a-02ef6c068343",
+        "SessionCost": 25,
+        "Downloadable": true,
+        "IsPublished": false,
+        "Id": "28f9255d-2325-11e6-ac3a-02ef6c068343",
+        "IsDeleted": false
+      },
+      "Questions": [
+        {
+          "Answers": [
+            {
+              "Description": "I LOVE YOU SO MUCH",
+              "QuestionId": "127cf8ee-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "127d227d-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "The sentence you want to say to your lover",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127cf8ee-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": "HOW ARE YOU TODAY",
+              "QuestionId": "127d49c9-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "127d72ad-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "You greet someone",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127d49c9-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": "YOU ARE SO BEAUTIFUL",
+              "QuestionId": "127d9cb6-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "1280a952-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "What you say when see pretty girl",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "127d9cb6-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        }, {
+          "Answers": [
+            {
+              "Description": "THANK YOU SO MUCH",
+              "QuestionId": "1280cfec-232c-11e6-ac3a-02ef6c068343",
+              "IsCorrect": false,
+              "Id": "1280f666-232c-11e6-ac3a-02ef6c068343",
+              "IsDeleted": false
+            }
+          ],
+          "Description": "When someone do something for you",
+          "QuizId": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+          "Id": "1280cfec-232c-11e6-ac3a-02ef6c068343",
+          "IsDeleted": false
+        },
+      ],
+      "QuizTypeId": 1,
+      "LessonId": "28f9255d-2325-11e6-ac3a-02ef6c068343",
+      "HelperText": null,
+      "Id": "127a6c85-232c-11e6-ac3a-02ef6c068343",
+      "IsDeleted": false
+    };
+
+    /*Get URL json*/
+    this.processData = function (inputData) {
+      var listOfWords = [];
+      for (var i = 0, l = inputData.length; i < l; i++) {
+          listOfWords.push([inputData[i].Answers[0].Description, // Get WORD
+          inputData[i].Description]); // Get descriptions
+      }
+      $scope.$broadcast('UnordereSentenceCtrlModelUpdated', listOfWords)
+    };
+
+    try {
+      var self = this;
+      $http.get(url)
+        .success(function (data, status) {
+          $scope.status = status;
+          $scope.jsondata = data;
+          // console.log(data);
+          var inputData = data.Questions;
+          // console.log(data.Questions);
+          self.processData(inputData);
+        })
+        .error(function (data, status) {
+          var inputData = $scope.jsondata.Questions;
+          // console.log(inputData);
+          self.processData(inputData);
+        });
+    } catch (ex) {
+      var inputData = $scope.jsondata.Questions;
+      this.processData(inputData);
     }
   })
+
   .controller('ActionVerbsCtrl', function ($scope) {
     $scope.model = {
       Description: 'Practice Action Verbs Vocabulary with this ESL  Memory Game. This game is also excellent for Vocabulary Teaching and Practice. ESL Learners and Teachers can use it to review English vocabulary or simply practice these words. This memory games has audio, images and text which makes it possible to practice spelling, reading, listening and word recognition. It is great for beginner and elementary ESL Lesson Plans.',
